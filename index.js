@@ -8,9 +8,15 @@ const LOG_FILENAME = 'last-run.log';
 const LOGS = [];
 const SETTINGS_FILENAME = 'domain-settings.txt';
 
-const FORPSI_USERNAME = '';
-const FORPSI_PASSWORD = '';
-const FORPSI_DOMAINS = [];
+const FORPSI_USERNAME = 'yourusername';
+const FORPSI_PASSWORD = 'yourpassword';
+const FORPSI_DOMAINS = [
+    {
+        name: 'yourdomain.hu',
+        editPage: 'https://admin.forpsi.hu/domain/domains-dns.php?id=123456',
+        enabled: true
+    }
+];
 
 process.on('uncaughtException', function(error) {
     handleError(error);
