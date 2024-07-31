@@ -18,7 +18,12 @@ const FORPSI_DOMAINS = [
     }
 ];
 
-process.on('uncaughtException', function(error) {
+let driver = null;
+
+process.on('uncaughtException', async function(error) {
+    if (driver) {
+        await driver.quit();
+    }
     handleError(error);
 });
 
@@ -93,7 +98,7 @@ function getDomainSettings() {
 
 async function updateDomain(editPage, ipAddress) {
     try {
-        const driver = await new Builder()
+        driver = await new Builder()
             .forBrowser(Browser.FIREFOX)
             .setFirefoxOptions(new firefox.Options().addArguments('--headless').windowSize({width: 1920, height: 1080}))
             .build();
